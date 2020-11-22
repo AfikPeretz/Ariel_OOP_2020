@@ -1,5 +1,4 @@
 package gameClient;
-
 import Server.Agent_Graph_Algo;
 import api.geo_location;
 import api.edge_data;
@@ -26,8 +25,7 @@ public class MyFrame extends JFrame{
 	public void update(Arena ar) {
 		this._ar = ar;
 	}
-	
-	
+
 	@Override
 	public void setSize(int w, int h) {
 		super.setSize(w,h);
@@ -48,15 +46,16 @@ public class MyFrame extends JFrame{
 		int h = this.getHeight();
 		g.clearRect(0, 0, w, h);
 		updateFrame();
-		drawFruits(g);
+		drawPokemons(g);
 		drawGraph(g);
-		drawRobots(g);
+		drawAgents(g);
 		drawInfo(g);
 		
 	}
 	private void drawInfo(Graphics g) {
 		List<String> str = _ar.get_info();
 		String dt = ""+ClientThereadedGame._dt;
+		g.setColor(Color.blue);
 		for(int i=0;i<str.size();i++) {
 			g.drawString(str.get(i)+" dt: "+dt,100,60+i*20);
 		}
@@ -72,13 +71,13 @@ public class MyFrame extends JFrame{
 			Iterator<edge_data> itr = gg.getE(n.getKey()).iterator();
 			while(itr.hasNext()) {
 				edge_data e = itr.next();
-				g.setColor(Color.gray);
+				g.setColor(Color.black);
 				drawEdge(e, g);
 			}
 		}
 	}
-	private void drawFruits(Graphics g) {
-		List<CL_Pokemon> fs = _ar.getFruits();
+	private void drawPokemons(Graphics g) {
+		List<CL_Pokemon> fs = _ar.getPokemons();
 		if(fs!=null) {
 		Iterator<CL_Pokemon> itr = fs.iterator();
 		
@@ -99,8 +98,8 @@ public class MyFrame extends JFrame{
 		}
 		}
 	}
-	private void drawRobots(Graphics g) {
-		List<CL_Agent> rs = _ar.getRobots();
+	private void drawAgents(Graphics g) {
+		List<CL_Agent> rs = _ar.getAgents();
 	//	Iterator<OOP_Point3D> itr = rs.iterator();
 		g.setColor(Color.red);
 		int i=0;
@@ -111,7 +110,7 @@ public class MyFrame extends JFrame{
 			if(c!=null) {
 
 				geo_location fp = this._w2f.world2frame(c);
-				g.drawOval((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r);
+				g.fillOval((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r);
 			//	g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
 				
 			}

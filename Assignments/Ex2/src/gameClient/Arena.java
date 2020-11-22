@@ -54,8 +54,8 @@ public class Arena {
 		MAX = new Point3D(x1+dx/10,y1+dy/10);
 		
 	}
-	public List<CL_Agent> getRobots() {return _agents;}
-	public List<CL_Pokemon> getFruits() {return _pokemons;}
+	public List<CL_Agent> getAgents() {return _agents;}
+	public List<CL_Pokemon> getPokemons() {return _pokemons;}
 
 	
 	public directed_weighted_graph getGraph() {
